@@ -16,7 +16,7 @@ cat << EOF > $1
  <center>
   <br><br><br>
   <h1>${app_name}</h1><br>
-  <h2>>>> <a href="itms-services://?action=download-manifest&url==https://github.com/wyxuan/IPA_PLIST">点击下载</a > <<<</h2>
+  <h2>>>> <a href="itms-services://?action=download-manifest&url==https://github.com/wyxuan/IPA_PLIST/blob/master/LBOC_Student_Adhoc.plist">点击下载</a > <<<</h2>
   <h6>版本：1.0.0.${BUILD_NUMBER}</h6>
   <h6>文件大小：${fileSize}</h6>
   <h6>更新时间：${current_time}</h6>
