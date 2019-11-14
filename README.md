@@ -1,2 +1,2 @@
 # IPA_PLIST
-spa plist
+ipa plist
