@@ -1,2 +1,2 @@
 # IPA_PLIST
-ipa plist add 
+ipa plist 
