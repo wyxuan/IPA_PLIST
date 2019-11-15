@@ -1,5 +1,21 @@
 set -e
 
+ipaName=$1
+plistHref=""
+fileName=""
+i=0
+for file in `ls -l -h | awk '{print $9}'`
+do
+   fileName=${file}
+   current_time=`ls -l -h build.sh | awk '{print $6, $7, $8}'`
+   fileSize=`ls -l -h build.sh | awk '{print $5}'`
+   build_version=${fileName:0:11}
+   if [[ ${fileName:0:11} == "student_ipa" ]] && [ ${i} -lt 4 ];
+   then
+     add='<center><br><br><br><h1>乐播课</h1><br><h2>>>> <a href="itms-services://?action=download-manifest&url=https://raw.githubusercontent.com/wyxuan/IPA_PLIST/master/'$fileName'.plist">点击下载</a > <<<</h2><h6>版本：'${fileName}'</h6><h6>文件大小：'${fileSize}'</h6><h6>更新时间：'${current_time}'</h6></center>'
+     plistHref=${plistHref}${add}
+   fi
+done
 cat << EOF > student.html
  <!DOCTYPE html>
  <html>
@@ -9,20 +25,10 @@ cat << EOF > student.html
         <meta http-equiv="Pragma" content="no-cache">
         <meta http-equiv="Cache-control" content="no-cache">
         <meta http-equiv="Cache" content="no-cache">
-  <title>x老师端 APP下载</title>
+  <title>学生端 APP下载</title>
  </head>
  <body>
-
- <center>
-  <br><br><br>
-  <h1>${app_name}</h1><br>
-  <h2>>>> <a href="itms-services://?action=download-manifest&url==https://github.com/wyxuan/IPA_PLIST/blob/master/LBOC_Student_Adhoc.plist">点击下载</a > <<<</h2>
-  <h6>版本：1.0.0.${BUILD_NUMBER}</h6>
-  <h6>文件大小：${fileSize}</h6>
-  <h6>更新时间：${current_time}</h6>
-  <br><br><br>
- </center>
-
+      ${plistHref}
  </body>
  </html>
 EOF
@@ -42,7 +48,7 @@ cat << EOF > student.plist
                         <key>kind</key>
                         <string>software-package</string>
                         <key>url</key>
-                        <string>http://10.240.15.83/UB_Student.ipa</string>
+                        <string>http://10.240.15.83/$ipaName.ipa</string>
                     </dict>
                 </array>
                 <key>metadata</key>
@@ -64,5 +70,5 @@ EOF
 
 
 git add .
-git commit -m "test"
+git commit -m "${ipaName}"
 git push origin master
