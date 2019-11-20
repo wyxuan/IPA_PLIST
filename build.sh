@@ -6,17 +6,17 @@ plistHref=""
 fileName=""
 i=0
 
-#if [[ $A == *$B* ]]
+#${file%.*}
 echo "app: ${ipaName} v:  ${newVersion}"
 for file in `ls -l -h | awk '{print $9}'`
 do
    fileName=${file}
-   current_time=`ls -l -h build.sh | awk '{print $6, $7, $8}'`
-   fileSize=`ls -l -h build.sh | awk '{print $5}'`
+   current_time=`ls -l -h ${file} | awk '{print $6, $7, $8}'`
+   fileSize=`ls -l -h ${file} | awk '{print $5}'`
    build_version=${fileName:0:11}
    if [[ ${fileName} == ${ipaName}"_"*.ipa ]] && [ ${i} -lt 4 ];
    then
-     add='<center><br><br><br><h1>乐播课</h1><br><h2>>>> <a href="itms-services://?action=download-manifest&url=https://raw.githubusercontent.com/wyxuan/IPA_PLIST/master/'$fileName'.plist">点击下载</a > <<<</h2><h6>版本：'${fileName}'</h6><h6>文件大小：'${fileSize}'</h6><h6>更新时间：'${current_time}'</h6></center>'
+     add='<center><br><br><br><h1>乐播课</h1><br><h2>>>> <a href="itms-services://?action=download-manifest&url=https://raw.githubusercontent.com/wyxuan/IPA_PLIST/master/'${fileName%.*}'.plist">点击下载</a > <<<</h2><h6>版本：'${fileName}'</h6><h6>文件大小：'${fileSize}'</h6><h6>更新时间：'${current_time}'</h6></center>'
      plistHref=${plistHref}${add}
    fi
 done
@@ -29,7 +29,7 @@ cat << EOF > ${ipaName}.html
         <meta http-equiv="Pragma" content="no-cache">
         <meta http-equiv="Cache-control" content="no-cache">
         <meta http-equiv="Cache" content="no-cache">
-  <title>学生端 APP下载</title>
+  <title> APP下载 </title>
  </head>
  <body>
       ${plistHref}
@@ -111,7 +111,7 @@ cat << EOF > UB_Student_${newVersion}.plist
 EOF
 fi
 
-cp ${ipaName}_${newVersion}.plist /Users/dfub/.jenkins/workspace/IPA_PLIST/UB_Student_${newVersion}.plist
+cp ${ipaName}_${newVersion}.plist /Users/dfub/.jenkins/workspace/IPA_PLIST/${ipaName}_${newVersion}.plist
 
 #git add .
 #git commit -m "${ipaName}"
