@@ -1,5 +1,5 @@
 set -e
-
+echo `pwd`
 m=`git status`
 if [[ -n "${m}" ]];
 then
