@@ -1,0 +1,2 @@
+jenkins
+sudo apachectl start
