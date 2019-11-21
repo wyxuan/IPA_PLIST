@@ -8,7 +8,7 @@ i=0
 
 #${file%.*}
 echo "app: ${ipaName} v:  ${newVersion}"
-for file in `ls -l -h | awk '{print $9}'`
+for file in `ls -lt -h | awk '{print $9}'`
 do
    fileName=${file}
    current_time=`ls -l -h ${file} | awk '{print $6, $7, $8}'`
