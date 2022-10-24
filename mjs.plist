@@ -11,7 +11,7 @@
                         <key>kind</key>
                         <string>software-package</string>
                         <key>url</key>
-                    <string>http://10.240.15.83/LBOC_Teacher_6.3.7.ipa</string>
+                    <string>http://172.17.39.159/mjs/134/mjs.ipa</string>
                     </dict>
                 </array>
                 <key>metadata</key>
@@ -23,7 +23,7 @@
                     <key>kind</key>
                     <string>software</string>
                     <key>bundle-identifier</key>
-                    <string>com.dfyb.test.LBOCTeacher</string>
+                    <string>com.msxf.ayh.internal.dev</string>
                 </dict>
             </dict>
         </array>
